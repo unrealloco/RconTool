@@ -26,7 +26,7 @@ public:
 	void sendCommand(char password[], char command[256])
 	{
 		//Challenging Rcon
-		char *nextToken, commandLine[256] = "\xFF\xFF\xFF\xFF challenge rcon\n";
+		char* nextToken, commandLine[256] = "\xFF\xFF\xFF\xFF challenge rcon\n";
 		sendto(Sock, commandLine, sizeof(commandLine), NULL, (SOCKADDR*)(&sin), sizeof(sin));
 		recv(Sock, recievedInfo, sizeof(recievedInfo), NULL);
 		strtok_s(recievedInfo, "\n", &nextToken);

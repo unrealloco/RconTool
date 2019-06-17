@@ -1,7 +1,7 @@
 #include <iostream>
-#include "main.h"
+#include "goldsrc.h"
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
 	//Argument Check
 	if (argc < 2)
