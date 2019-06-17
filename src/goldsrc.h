@@ -26,7 +26,7 @@ public:
 	void sendCommand(char password[], char command[256])
 	{
 		//Challenging Rcon
-		char* nextToken, commandLine[256] = "\xFF\xFF\xFF\xFF challenge rcon\n";
+		char *nextToken, commandLine[256] = "\xFF\xFF\xFF\xFF challenge rcon\n";
 		sendto(Sock, commandLine, sizeof(commandLine), NULL, (SOCKADDR*)(&sin), sizeof(sin));
 		recv(Sock, recievedInfo, sizeof(recievedInfo), NULL);
 		strtok_s(recievedInfo, "\n", &nextToken);
@@ -43,18 +43,44 @@ public:
 		timeout.tv_sec = 0;
 		timeout.tv_usec = 200000;
 		fd_set fds;
+		bool returnValue;
 		FD_ZERO(&fds);
 		FD_SET(Sock, &fds);
 		select(Sock + 1, &fds, NULL, NULL, &timeout);
-		if (FD_ISSET(Sock, &fds))
+		try
 		{
-			recv(Sock, recievedInfo, sizeof(recievedInfo), NULL);
-			std::cout << std::endl << recievedInfo + 5 << std::endl;
-
-			return true;
+			if (FD_ISSET(Sock, &fds))
+			{
+				recv(Sock, recievedInfo, sizeof(recievedInfo), NULL);
+				if (recievedInfo[5] != NULL)
+				{
+					std::cout << std::endl << recievedInfo + 5 << std::endl;
+					returnValue = true;
+				}
+				else
+				{
+					throw(101);
+				}
+			}
+			else
+				throw(102);
+		}
+		catch (int thrownInfo)
+		{
+			switch (thrownInfo)
+			{
+			case 101:
+				std::cout << "\nNothing to Print\n\n";
+				returnValue = false;
+				break;
+			case 102:
+				std::cout << "\nNothing is set to the Socket, the Server is probably restarting!\n\n";
+				returnValue = false;
+				break;
+			}
 		}
 
-		return false;
+		return returnValue;
 	}
 
 	void closeConnection()

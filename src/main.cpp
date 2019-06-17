@@ -26,8 +26,7 @@ int main(int argc, char** argv)
 	Server1.sendCommand(argv[1], argv[2]);
 
 	//Printing
-	if (!Server1.printResault())
-		std::cout << "Nothing to print";
+	Server1.printResault();
 
 	//Closing Socket
 	Server1.closeConnection();
