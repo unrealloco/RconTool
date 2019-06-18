@@ -13,4 +13,3 @@ Then you simply need to open your powershell and run the exe file with two argum
 Here you have to type the pass.
 #### Cmd
 Here you have to type the command.
-### How to select the ip and the port??
