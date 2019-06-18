@@ -4,7 +4,7 @@ Works for Half-Life and Counter-Strike 1.6.
 
 ## How to use it
 ### 1. Compile
-First of all you have to compile it.
+First of all you have to compile it. Visual Studio 2019 may help.
 #### Note:
 Before compiling make sure you've set the right ip and port(line 23).
 ### 2. Open
