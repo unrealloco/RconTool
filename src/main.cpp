@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 	rcon_server Server1;
 
 	//Connecting
-	Server1.Bind("localhost", 27015);
+	Server1.Bind("185.148.145.232", 27021);
 
 	//Sending
 	Server1.sendCommand(argv[1], argv[2]);
