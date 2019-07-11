@@ -63,7 +63,9 @@ public:
 				}
 			}
 			else
+			{
 				throw(102);
+			}
 		}
 		catch (int thrownInfo)
 		{
