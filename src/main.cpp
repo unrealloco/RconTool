@@ -14,13 +14,20 @@ int main(int argc, char** argv)
 	WSAData wsaData;
 	WORD DllVersion = MAKEWORD(2, 1);
 	if (WSAStartup(DllVersion, &wsaData) != 0)
+	{
+		printf("asd");
 		return 0;
+	}
 
 	//Creating object
 	rcon_server Server1;
 
 	//Connecting
-	Server1.Bind("185.148.145.232", 27021);
+	if (!Server1.Connect("93.123.18.78", 27016))
+	{
+		printf("asd");
+		return 0;
+	}
 
 	//Sending
 	Server1.sendCommand(argv[1], argv[2]);
