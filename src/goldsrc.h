@@ -14,14 +14,22 @@ private:
 	char recievedInfo[1400];
 
 public:
-	bool Connect(const char ipAddress[], short port)
+	rcon_server(const char ipAddress[], short port)
 	{
 		//Setting addr
 		ZeroMemory(&sin, sizeof(sin));
 		sin.sin_family = AF_INET;
 		sin.sin_port = htons(port);
 		InetPton(AF_INET, ipAddress, &sin.sin_addr);
-
+	}
+	
+	~rcon_server()
+	{
+		closesocket(Sock);
+	}
+	
+	bool Connect(const char ipAddress[], short port)
+	{
 		if (connect(Sock, (const SOCKADDR*)&sin, sizeof(sin)) != 0)
 		{
 			return false;
@@ -62,10 +70,5 @@ public:
 		}
 
 		return false;
-	}
-
-	void closeConnection()
-	{
-		closesocket(Sock);
 	}
 };
