@@ -15,15 +15,15 @@ int main(int argc, char** argv)
 	WORD DllVersion = MAKEWORD(2, 1);
 	if (WSAStartup(DllVersion, &wsaData) != 0)
 	{
-		printf("asd");
+		printf("Can't setup Sockets");
 		return 0;
 	}
 
 	//Creating object
-	rcon_server Server1;
+	rcon_server Server1("93.123.18.78", 27016);
 
 	//Connecting
-	if (!Server1.Connect("93.123.18.78", 27016))
+	if (!Server1.Connect())
 	{
 		printf("asd");
 		return 0;
@@ -34,9 +34,6 @@ int main(int argc, char** argv)
 
 	//Printing
 	Server1.printResault();
-
-	//Closing Socket
-	Server1.closeConnection();
 
 	return 1;
 }
