@@ -1,5 +1,5 @@
 #include <iostream>
-#include "goldsrc.h"
+#include "query.h"
 
 int main(int argc, char** argv)
 {
@@ -20,20 +20,27 @@ int main(int argc, char** argv)
 	}
 
 	//Creating object
-	rcon_server Server1("93.123.18.78", 27016);
+	BASIC_QUERY server("185.148.145.232", 27021);
 
 	//Connecting
-	if (!Server1.Connect())
+	if (!server.Connect())
 	{
-		printf("asd");
-		return 0;
+		printf("Can't connect to server");
 	}
 
-	//Sending
-	Server1.sendCommand(argv[1], argv[2]);
+	//Sending players command;
+	/*server.sendCommand(A2S_INFO);
+	if (server.recieveInfo())
+	{
+		server.printResault(6);
+	}*/
 
-	//Printing
-	Server1.printResault();
+	//Server1.printResault();
+
+	//Sending the actual rcon command
+	server.sendRconCommand(argv[1], argv[2]);
+	server.recieveInfo();
+	server.printResault(5);
 
 	return 1;
 }
